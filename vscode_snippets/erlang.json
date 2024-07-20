@@ -1,0 +1,136 @@
+{
+"Erlang doc":{
+	"prefix": "doc",
+	"body": [
+		"%% @doc $1",
+		"-spec $CLIPBOARD $2",
+		"    when $3."
+	]
+},
+ "Module Name": {
+ 	"prefix": "mn",
+ 	"body": [
+ 		"-module($TM_FILENAME_BASE).",
+		"",
+	"-export([]).",
+		"",
+		"$1"
+ 	],
+	"description": "Module name and export"
+ },
+ "Gen Server Behavior": {
+	"prefix" : "gs",
+	"body" : [
+		"-export([init/1, handle_call/3, handle_cast/2, handle_info/2]).",
+		"",
+		"-behavior(gen_server).",
+		"",
+		"-record($1, {$2}).",
+		"",
+		"init(_Args) -> {ok, #$1{}}.",
+		"",
+		"handle_call(_Req, _From, State) -> {reply, ok ,State}.",
+		"",
+		"handle_cast(_Req, State) -> {noreply, State}.",
+		"",
+		"handle_info(_Req, State) -> {noreply, State}."
+	],
+	"description": "Simple gen_server behavior"
+ },
+ "Supervisor Behavior": {
+	"prefix" : "sv",
+	"body" : [
+		"-export([init/1]).",
+		"",
+		"-behavior(supervisor).",
+		"",
+		"init(_Args) ->",
+		"   SupFlags = #{strategy => ${1:one_for_one},   %% one_for_all | one_for_one | rest_for_one | simple_one_for_one",
+		"                intensity => ${2:1},            %% int >= 0, // how many times to try restart, then  shutdown",
+		"                period => ${3:2}},              %% int >= 0  // max intensity in how many seconds",
+		"   ChildSpecs = [${4:#{id => ${5:term()},",
+		"                   start => {${6:module()}, ${7:atom()}, ${8:term}\\},",
+		"                   restart => ${9:permanent},   %% permanent | transient | temporary",
+		"                   type => ${10:worker},        %% worker | supervisor",
+		"                   modules => [${6:atom}]\\}}],",
+		"   {ok, {SupFlags, ChildSpecs}}."
+	],
+	"description": "Complete Supervisor behavior"
+ },
+ "CT file" : {
+	"prefix" : "ct",
+	"body" : [
+		"-module($TM_FILENAME_BASE).",
+		"",
+		"-compile(export_all).",
+		"",
+		"-include_lib(\"common_test/include/ct.hrl\").",
+		"",
+		"suite() ->",
+		"    [{timetrap, {seconds, 120}}].",
+		"",
+		"init_per_suite(Config) ->",
+		"    Config.",
+		"",
+		"end_per_suite(_Config) ->",
+		"    ok.",
+		"",
+		"init_per_group(_GroupName, Config) ->",
+		"    Config.",
+		"",
+		"end_per_group(_GroupName, _Config) ->",
+		"    ok.",
+		"",
+		"init_per_testcase(_TestCase, _Config) ->",
+		"    ok.",
+		"",
+		"end_per_test_case(_TestCase, _Config) ->",
+		"    ok.",
+		"",
+		"group() ->",
+		"    [].",
+		"",
+		"all() ->",
+		"    [${1:test_1}].",
+		"",
+		"${1:test_1}(_Config) ->",
+		"    ok = ok."
+	],
+	"description": "Simple Common Test Suite"
+ },
+ "COWBOY REST HANDLER" : {
+	"prefix" : "cbrest",
+	"body": [
+		"-export([init/2, allowed_methods/2, content_types_provided/2, content_types_accepted/2, handle_post/2, handle_get/2, options/2]).",
+		"",
+		"init(Req, State) -> ",
+		"   {cowboy_rest, Req, State}.",
+		"",
+		"options(Req, State) ->",
+		"   Req1 = cowboy_req:set_resp_header(<<\"access-control-allow-methods\">>, <<\"GET\">>, Req),",
+		"   Req2 = cowboy_req:set_resp_header(<<\"access-control-allow-origin\">>, <<\"*\">>, Req1),",
+		"   {ok, Req2,State}.",
+		"",
+		"allowed_methods(Req, State) -> {[<<\"GET\">>, <<\"POST\">>], Req, State}.",
+		"",
+		"content_types_provided(Req, State) ->",
+		"   {[",
+		"        {<<\"application/json\">>, handle_get}",
+		"   ], Req, State}.",
+		"",
+		"content_types_accepted(Req, State) ->",
+		"   {[",
+		"        {<<\"application/json\">>, handle_post}",
+		"   ], Req, State}.",
+		"",
+		"handle_get(Req, State) ->",
+		"   JSON = $1,",
+		"   Req1 = cowboy_req:set_resp_header(<<\"access-control-allow-origin\">>, <<\"*\">>, Req),",
+		"   {JSON, Req, State}.",
+		"",
+		"handle_post(Req, State) ->",
+		"   {true, Req, State}."
+	],
+	"description": "Simple REST-api server with CORS enabled"
+ }
+}

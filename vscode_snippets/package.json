@@ -1,0 +1,17 @@
+{
+	"name": "my_snips",
+	"contributes": {
+		"snippets": [
+			{
+				"language": [
+					"erlang"
+				],
+				"path": "./erlang.json"
+			},
+			{
+				"language": ["all"],
+				"path": "./rebar.json"
+			}
+		]
+	}
+}

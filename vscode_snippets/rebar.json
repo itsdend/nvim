@@ -1,0 +1,15 @@
+{
+	"Erl Format": {
+	 	"prefix": "fmt",
+	 	"body": [
+			"{plugins, [rebar3_format]}.",
+			"",
+			"{format, [",
+			"   {files, [\"src/*.erl\", \"include/*.erl\", \"test/*erl\", \"src/*.hrl\", \"include/*.hrl\", \"test/*hrl\", \"test/*data/*.erl\", \"test/*data/*.hrl\"]}",
+			"]}."
+	 	],
+	 	"description": "Plugin for rebar3_format"
+	 }
+}
+
+
