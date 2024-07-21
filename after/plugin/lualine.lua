@@ -10,9 +10,15 @@ require 'lualine'.setup {
 	},
 	tabline = {
 		lualine_a = { 'filetype', 'filename' },
-		lualine_z = {{
-			'datetime',
-			style = '%H:%M'
-					}}
+		lualine_z = {
+    {
+      'fileformat',
+      symbols = {
+        unix = '󰻀', -- e712
+        dos = '',  -- e70f
+        mac = '',  -- e711
+      }
+    }
+  }
 	}
 }
