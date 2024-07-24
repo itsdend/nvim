@@ -33,9 +33,7 @@ vim.keymap.set("v", "<leader>p", 'o<CR>"+p')
 vim.keymap.set({ "n", "v" }, '~', '$', { noremap = true })
 vim.keymap.set({ "n", "v" }, '&', '~', { noremap = true })
 set.expandtab = false
---indenting and outdenting
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
-vim.keymap.set('i', 'kj', '<Esc>', { noremap = true })
 
 
 return require 'packer'.startup(function()
@@ -85,36 +83,12 @@ return require 'packer'.startup(function()
 
 		use 'HiPhish/rainbow-delimiters.nvim'
 		-- This module contains a number of default definitions
-		local rainbow_delimiters = require 'rainbow-delimiters'
 
-		vim.g.rainbow_delimiters = {
-			strategy = {
-				[''] = rainbow_delimiters.strategy['global'],
-				erlang = rainbow_delimiters.strategy['global']
-			},
-			query = {
-				[''] = 'rainbow-delimiters',
-			},
-			priority = {
-				[''] = 510,
-			},
-			highlight = {
-			},
-		}
-
+		-- TODO 
 		vim.opt.fillchars = { eob = " " }
 
+		-- KEYMAP
 		-- neotree
-		vim.keymap.set("n", "<A-u>e", ":Neotree filesystem reveal right toggle<CR>",
-			{ noremap = true, silent = true })
-		vim.keymap.set("n", "<A-u><A-e>", ":Neotree filesystem reveal right toggle<CR>",
-			{ noremap = true, silent = true })
-		vim.api.nvim_create_autocmd("VimEnter", {
-			callback = function()
-				vim.cmd(":Neotree right")
-				-- vim.cmd(':wincmd h')  --start on the focus right
-			end,
-		})
 
 		--smoothscroll
 		use 'karb94/neoscroll.nvim'
@@ -132,6 +106,7 @@ return require 'packer'.startup(function()
 				close_on_exit = false,
 				config = true
 			})
+
 		end }
 		vim.keymap.set({ 'n', 't', 'i' }, '<A-t>t', ':lua require"toggleterm".toggle()<CR>',
 			{ noremap = true, silent = true })
@@ -194,12 +169,32 @@ return require 'packer'.startup(function()
 					routes = {
 						{
 							filter = {
-								event = "msg_show",
-								kind = "",
-								find = "written",
+								any = {
+									{
+										event = "msg_show",
+										kind = "",
+										find = "written",
+									},
+									{
+										event = 'notify',
+										kind = 'info',
+										find = 'hidden'
+									},
+									{
+										event = 'notify',
+										kind = 'warn',
+										find = ''
+									},
+									{
+										event = 'lsp',
+										kind = "message",
+										find = "missing an erlang_ls"
+									}
+								}
 							},
 							opts = { skip = true },
-						},
+						}
+						,
 					}
 				})
 			end
@@ -341,9 +336,9 @@ return require 'packer'.startup(function()
 				row = 0,
 				col = 1
 			},
-			yadm                         = {
-				enable = false
-			},
+			-- yadm = {
+			-- 	enable = false
+			-- },
 		}
 		-- show colors behind the hex codes
 		use 'NvChad/nvim-colorizer.lua'
