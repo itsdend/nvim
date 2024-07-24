@@ -272,12 +272,12 @@ return require 'packer'.startup(function()
 				['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 			}),
 			formatting = {
-				fields = {"kind", "abbr", "menu"},
-				format = function (_, vim_item)
+				fields = { "kind", "abbr", "menu" },
+				format = function(_, vim_item)
 					local kind = vim_item.kind
-					vim_item.kind =  (cmp_icons[kind] or "󱧤") .. " "
+					vim_item.kind = (cmp_icons[kind] or "󱧤") .. " "
 					vim_item.menu = " " .. kind .. " "
-				return vim_item
+					return vim_item
 				end
 			},
 			sources = cmp.config.sources({
