@@ -1,13 +1,29 @@
-local set = vim.opt
-
-set.scrolloff = 8
-set.relativenumber = true
-set.number = true
-set.termguicolors = true
+vim.opt.cursorline = true
+vim.cmd('syntax enable')
+vim.cmd('syntax on')
+vim.opt.scrolloff = 8
+vim.opt.relativenumber = true
+vim.opt.number = true
+vim.opt.termguicolors = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
-set.laststatus = 3
-set.linebreak = true
+vim.opt.laststatus = 3
+vim.opt.linebreak = true
+vim.opt.incsearch = true
+vim.opt.hlsearch = false
+vim.opt.fileencoding = 'utf-8'
+vim.opt.expandtab = false
+vim.opt.fillchars = { eob = " " }
+vim.keymap.set("n", "<C-d>", '<C-d>zz', { noremap = true })
+vim.keymap.set("n", "<C-u>", '<C-u>zz', { noremap = true })
+vim.keymap.set("n", "<leader>p", '"+p')
+vim.keymap.set("n", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>p", 'o<CR>"+p')
+vim.keymap.set({ "n", "v" }, '~', '$', { noremap = true })
+vim.keymap.set({ "n", "v" }, '&', '~', { noremap = true })
+vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
+vim.keymap.set({ 'n', 'v', 'i' }, '<A-s>', '<cmd> w<CR>', { noremap = true, silent = true })
 
 -- window navigation
 vim.keymap.set('n', '<A-h>', '<C-W>h', { silent = true })
@@ -51,6 +67,7 @@ vim.keymap.set({ 'n', 'i' }, '<A-i><A-o>', '<C-w>o', { silent = true })
 function CLOSE_CURRENT_BUFFER()
 	vim.cmd("bdelete")
 end
+
 -- Set up keymap for Alt + u q to call the function
 vim.keymap.set("n", "<A-i>i", "<cmd>lua CLOSE_CURRENT_BUFFER()<CR>", { silent = true })
 vim.keymap.set("n", "<A-i><A-i>", "<cmd>lua CLOSE_CURRENT_BUFFER()<CR>", { silent = true })
@@ -62,12 +79,12 @@ vim.keymap.set("n", "<A-i><A-i>", "<cmd>lua CLOSE_CURRENT_BUFFER()<CR>", { silen
 function OPEN_WORK_TASKS()
 	vim.cmd("edit /mnt/f/repo/notes/work_tasks.md")
 end
+
 vim.keymap.set("n", "<A-u>w", "<cmd>lua OPEN_WORK_TASKS()<CR>", { silent = true })
 
 
 
 
-vim.keymap.set("n", "<S-k>", "<cmd>lua vim.lsp.buf.hover()<CR>", { silent = true })
 
 
 -- OPEN IN BROWSER
@@ -77,7 +94,7 @@ end
 
 vim.keymap.set("n", "<A-q>.", '<cmd>lua OPEN_IN_BROWSER(vim.fn.expand("%:p"))<CR>', { silent = true })
 vim.keymap.set("n", "<A-q>t",
-	'<cmd>lua OPEN_IN_BROWSER(vim.fn.expand("%:h") .. "/" .. "_build/test/logs/suite.log.latest.html")<CR>',
+	'<cmd>lua OPEN_IN_BROWSER(vim.fn.expand(vim.fn.getcwd()) .. "/" .. "_build/test/logs/suite.log.latest.html")<CR>',
 	{ silent = true })
 
 
@@ -115,8 +132,6 @@ vim.keymap.set("n", '<A-n>w', '<cmd> lua vim.diagnostic.goto_next( {severity = v
 vim.keymap.set("n", '<A-m>w', '<cmd> lua vim.diagnostic.goto_prev( {severity = vim.diagnostic.severity.WARN})<CR>',
 	{ silent = true })
 
-vim.keymap.set('n', '<A-n>c', '<cmd> Gitsigns next_hunk<CR>', { silent = true })
-vim.keymap.set('n', '<A-m>c', '<cmd> Gitsigns prev_hunk<CR>', { silent = true })
 --
 --#region DEPRECATED
 --
@@ -124,8 +139,8 @@ vim.keymap.set('n', '<A-m>c', '<cmd> Gitsigns prev_hunk<CR>', { silent = true })
 -- vrijedi za winodws masine i wsl2
 function OPEN_IN_OPERA_GX(current_file)
 	local opera_invoke =
-	"cmd.exe /C start \"\" \"$(wslpath -w /mnt/c/Users/Marko/AppData/Local/Programs/Opera\\ GX/launcher.exe)\" $(wslpath -w " ..
-	current_file .. ")"
+		"cmd.exe /C start \"\" \"$(wslpath -w /mnt/c/Users/Marko/AppData/Local/Programs/Opera\\ GX/launcher.exe)\" $(wslpath -w " ..
+		current_file .. ")"
 	vim.fn.system(opera_invoke)
 end
 
