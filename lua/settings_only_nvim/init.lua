@@ -85,7 +85,13 @@ vim.keymap.set("n", "<A-u>w", "<cmd>lua OPEN_WORK_TASKS()<CR>", { silent = true 
 
 
 
+function IMGCAT(file_loc)
+	vim.fn.system("output=$(wezterm cli split-pane) && echo -e \"wezterm imgcat " ..
+	file_loc .. "\\n\" | wezterm cli send-text --no-paste --pane-id \"$output\""
+	)
+end
 
+vim.keymap.set("n", "<A-q>i", '<cmd> lua IMGCAT(vim.fn.expand("%:p"))<CR>', { silent = true })
 
 -- OPEN IN BROWSER
 function OPEN_IN_BROWSER(file_loc)
