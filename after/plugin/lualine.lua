@@ -1,24 +1,25 @@
 require 'lualine'.setup {
 	options = {
 		icons_enabled = true,
-		extensions = {'neo-tree'}
+		extensions = { 'neo-tree' }
 	},
 	sections = {
-		lualine_c = {},
+		lualine_c = { 'macro_recording', "%S" },
 		lualine_x = {
-			'encoding'}
+			'encoding'
+		}
 	},
 	tabline = {
 		lualine_a = { 'filetype', 'filename' },
 		lualine_z = {
-    {
-      'fileformat',
-      symbols = {
-        unix = '󰻀', -- e712
-        dos = '',  -- e70f
-        mac = '',  -- e711
-      }
-    }
-  }
+			{
+				'fileformat',
+				symbols = {
+					unix = '󰻀', -- e712
+					dos = '', -- e70f
+					mac = '', -- e711
+				}
+			}
+		}
 	}
 }

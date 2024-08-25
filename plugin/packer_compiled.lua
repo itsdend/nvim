@@ -129,6 +129,11 @@ _G.packer_plugins = {
     path = "/home/marko/.local/share/nvim/site/pack/packer/start/leap.nvim",
     url = "https://github.com/ggandor/leap.nvim"
   },
+  ["lualine-macro-recording.nvim"] = {
+    loaded = true,
+    path = "/home/marko/.local/share/nvim/site/pack/packer/start/lualine-macro-recording.nvim",
+    url = "https://github.com/yavorski/lualine-macro-recording.nvim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/marko/.local/share/nvim/site/pack/packer/start/lualine.nvim",

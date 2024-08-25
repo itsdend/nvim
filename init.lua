@@ -54,7 +54,11 @@ return require 'packer'.startup(function()
 	}
 	use {
 		'nvim-lualine/lualine.nvim',
-		requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+		requires = {
+			'nvim-tree/nvim-web-devicons',
+			'yavorski/lualine-macro-recording.nvim',
+			opt = true
+		}
 	}
 	use {
 		--"williamboman/mason.nvim",
@@ -88,7 +92,7 @@ return require 'packer'.startup(function()
 	}
 
 	use { 'ThePrimeagen/harpoon', branch = 'harpoon2', }
- require("harpoon").setup()
+	require("harpoon").setup()
 
 	--autopair parenthesis
 	use {
