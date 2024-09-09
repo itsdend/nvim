@@ -160,7 +160,7 @@ _G.packer_plugins = {
     url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["nvim-autopairs"] = {
-    config = { "\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0" },
+    config = { "\27LJ\2\n¢\1\0\0\t\0\b\0\0206\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\0016\0\0\0'\2\1\0B\0\2\0026\1\0\0'\3\3\0B\1\2\0029\2\4\0\18\4\1\0'\6\5\0'\a\6\0005\b\a\0B\4\4\0A\2\0\1K\0\1\0\1\2\0\0\verlang\a>>\a<<\radd_rule\24nvim-autopairs.rule\nsetup\19nvim-autopairs\frequire\0" },
     loaded = true,
     path = "/home/marko/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
     url = "https://github.com/windwp/nvim-autopairs"
@@ -250,7 +250,7 @@ _G.packer_plugins = {
 time([[Defining packer_plugins]], false)
 -- Config for: nvim-autopairs
 time([[Config for nvim-autopairs]], true)
-try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+try_loadstring("\27LJ\2\n¢\1\0\0\t\0\b\0\0206\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\0016\0\0\0'\2\1\0B\0\2\0026\1\0\0'\3\3\0B\1\2\0029\2\4\0\18\4\1\0'\6\5\0'\a\6\0005\b\a\0B\4\4\0A\2\0\1K\0\1\0\1\2\0\0\verlang\a>>\a<<\radd_rule\24nvim-autopairs.rule\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
 time([[Config for nvim-autopairs]], false)
 
 _G._packer.inside_compile = false

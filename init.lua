@@ -99,6 +99,12 @@ return require 'packer'.startup(function()
 		'windwp/nvim-autopairs',
 		config = function()
 			require('nvim-autopairs').setup {}
+			local npairs = require'nvim-autopairs'
+			local Rule = require'nvim-autopairs.rule'
+			npairs.add_rule(Rule('<<', '>>',
+			{
+				'erlang'
+			}))
 		end
 	}
 
