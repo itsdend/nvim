@@ -20,8 +20,6 @@ vim.keymap.set("n", "<leader>p", '"+p')
 vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>p", 'o<CR>"+p')
-vim.keymap.set({ "n", "v" }, '~', '$', { noremap = true })
-vim.keymap.set({ "n", "v" }, '&', '~', { noremap = true })
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
 vim.keymap.set({ 'n', 'v', 'i' }, '<A-s>', '<cmd> w<CR>', { noremap = true, silent = true })
 
