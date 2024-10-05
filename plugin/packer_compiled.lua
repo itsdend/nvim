@@ -220,6 +220,11 @@ _G.packer_plugins = {
     path = "/home/marko/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  ["toggleterm-manager.nvim"] = {
+    loaded = true,
+    path = "/home/marko/.local/share/nvim/site/pack/packer/start/toggleterm-manager.nvim",
+    url = "https://github.com/ryanmsnyder/toggleterm-manager.nvim"
+  },
   ["toggleterm.nvim"] = {
     loaded = true,
     path = "/home/marko/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",

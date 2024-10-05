@@ -79,6 +79,16 @@ return require 'packer'.startup(function()
 	use { "akinsho/toggleterm.nvim", tag = '*'
 	}
 
+
+	 use {
+		'ryanmsnyder/toggleterm-manager.nvim',
+		requires = {
+		  'akinsho/toggleterm.nvim',    -- Required dependency
+		  'nvim-telescope/telescope.nvim',  -- Required dependency
+		  'nvim-lua/plenary.nvim',          -- Telescope dependency
+		}
+	}
+
 	-- noice
 	use 'MunifTanjim/nui.nvim'
 
@@ -145,6 +155,7 @@ return require 'packer'.startup(function()
 
 
 	use { "itsdend/pastel_inu_nvim", as = "catppuccin" }
+	-- use { "~/Projects/personal/pastel_inu_nvim", as = "catppuccin" }
 	require("plugins.catppuccin")
 	vim.cmd 'colorscheme catppuccin-mocha'
 

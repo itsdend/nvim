@@ -18,6 +18,9 @@ vim.keymap.set('n', '<M-f><M-k>', '<cmd>Telescope keymaps<CR>', { noremap = true
 vim.keymap.set('n', '<M-f>b', '<cmd>Telescope buffers<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<M-f><M-b>', '<cmd>Telescope buffers<CR>', { noremap = true, silent = true })
 
+vim.keymap.set('n', '<M-f>t', '<cmd> Telescope toggleterm_manager<CR>', {noremap = true, silent = true})
+vim.keymap.set('n', '<M-f><M-t>', '<cmd> Telescope toggleterm_manager<CR>', {noremap = true, silent = true})
+
 local telescope = require('telescope')
 -- Setup Telescope with custom key mappings
 telescope.setup {
