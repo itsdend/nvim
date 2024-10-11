@@ -13,7 +13,10 @@ vim.opt.incsearch = true
 vim.opt.hlsearch = false
 vim.opt.fileencoding = 'utf-8'
 vim.opt.expandtab = false
+vim.opt.swapfile = false
 vim.opt.fillchars = { eob = " " }
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 vim.keymap.set("n", "<C-d>", '<C-d>zz', { noremap = true })
 vim.keymap.set("n", "<C-u>", '<C-u>zz', { noremap = true })
 vim.keymap.set("n", "<leader>p", '"+p')

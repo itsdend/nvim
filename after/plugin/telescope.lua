@@ -31,10 +31,12 @@ telescope.setup {
 		mappings = {
 			i = {
 				['<C-l>'] = 'select_vertical',
+				['<C-j>'] = 'select_horizontal',
 				['<CR>'] = 'select_default'
 			},
 			n = {
 				['<C-l>'] = 'select_vertical',
+				['<C-j>'] = 'select_horizontal',
 				['<CR>'] = 'select_default'
 			}
 		},
