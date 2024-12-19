@@ -151,7 +151,6 @@ return require 'packer'.startup(function()
 	use { 'ggandor/leap.nvim',
 		requires = 'tpope/vim-repeat'
 	}
-	require('leap').create_default_mappings()
 
 
 	use { "itsdend/pastel_inu_nvim", as = "catppuccin" }

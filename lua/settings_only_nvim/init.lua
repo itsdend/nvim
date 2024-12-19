@@ -139,6 +139,12 @@ vim.keymap.set("n", '<A-n>w', '<cmd> lua vim.diagnostic.goto_next( {severity = v
 vim.keymap.set("n", '<A-m>w', '<cmd> lua vim.diagnostic.goto_prev( {severity = vim.diagnostic.severity.WARN})<CR>',
 	{ silent = true })
 
+--  leap keymaps
+vim.keymap.set('n',        'f', '<Plug>(leap)')
+vim.keymap.set('n',        'F', '<Plug>(leap-from-window)')
+vim.keymap.set({'x', 'o'}, 'f', '<Plug>(leap-forward)')
+vim.keymap.set({'x', 'o'}, 'F', '<Plug>(leap-backward)')
+
 --
 --#region DEPRECATED
 --
