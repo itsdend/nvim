@@ -6,21 +6,35 @@
 --}
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-require('lspconfig').lua_ls.setup { capabilities = capabilities }
-require('lspconfig').nil_ls.setup { capabilities = capabilities }
-require('lspconfig').lemminx.setup { capabilities = capabilities }
-require('lspconfig').cssls.setup { capabilities = capabilities }
-require('lspconfig').clangd.setup { capabilities = capabilities }
-require('lspconfig').dotls.setup { capabilities = capabilities }
-require('lspconfig').marksman.setup { capabilities = capabilities }
-require('lspconfig').html.setup { capabilities = capabilities }
-require('lspconfig').elp.setup { capabilities = capabilities }
-require('lspconfig').elixirls.setup { capabilities = capabilities }
-require('lspconfig').jsonls.setup { capabilities = capabilities }
-require('lspconfig').bashls.setup { capabilities = capabilities }
-require('lspconfig').vimls.setup { capabilities = capabilities }
+vim.lsp.config('lua_ls', { capabilities = capabilities })
+vim.lsp.config('nil_ls', { capabilities = capabilities })
+vim.lsp.config('lemminx', { capabilities = capabilities })
+vim.lsp.config('cssls', { capabilities = capabilities })
+vim.lsp.config('clangd', { capabilities = capabilities })
+vim.lsp.config('dotls', { capabilities = capabilities })
+vim.lsp.config('marksman', { capabilities = capabilities })
+vim.lsp.config('html', { capabilities = capabilities })
+vim.lsp.config('elp', { capabilities = capabilities })
+vim.lsp.config('elixirls', { capabilities = capabilities })
+vim.lsp.config('jsonls', { capabilities = capabilities })
+vim.lsp.config('bashls', { capabilities = capabilities })
+vim.lsp.config('vimls', { capabilities = capabilities })
 
 
+
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('nil_ls')
+vim.lsp.enable('lemminx')
+vim.lsp.enable('cssls')
+vim.lsp.enable('clangd')
+vim.lsp.enable('dotls')
+vim.lsp.enable('marksman')
+vim.lsp.enable('html')
+vim.lsp.enable('elp')
+vim.lsp.enable('elixirls')
+vim.lsp.enable('jsonls')
+vim.lsp.enable('bashls')
+vim.lsp.enable('vimls')
 
 --mappings
 -- Use LspAttach autocommand to only map the following keys
