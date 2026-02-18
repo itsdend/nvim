@@ -148,7 +148,7 @@ return require 'packer'.startup(function()
 	vim.keymap.set('n', '<leader>u', require('undotree').toggle, { noremap = true, silent = true })
 
 
-	use { 'ggandor/leap.nvim',
+	use { 'https://codeberg.org/andyg/leap.nvim',
 		requires = 'tpope/vim-repeat'
 	}
 
