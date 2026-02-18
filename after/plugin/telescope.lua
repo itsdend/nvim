@@ -22,7 +22,8 @@ vim.keymap.set('n', '<M-f>t', '<cmd> Telescope toggleterm_manager<CR>', {noremap
 vim.keymap.set('n', '<M-f><M-t>', '<cmd> Telescope toggleterm_manager<CR>', {noremap = true, silent = true})
 
 
-vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, { desc = 'Goto [R]eferences (Telescope)' })
+vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<CR>', { desc = 'find refs in repo', noremap = true, silent= true })
+-- vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, { desc = 'Goto [R]eferences (Telescope)' })
 
 local telescope = require('telescope')
 -- Setup Telescope with custom key mappings
