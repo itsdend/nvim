@@ -75,6 +75,18 @@ local ascii_art = [[
 ]]
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
+
+        local argc = vim.fn.argc()
+
+        -- nvim README.md
+        if argc > 0 then
+            local target = vim.fn.argv(0)
+
+            -- ako je argument fajl -> preskoči dashboard
+            if vim.fn.isdirectory(target) == 0 then
+                return
+            end
+        end
 		-- Check if the only buffer is the default [No Name] buffer and close it
 		local buffers = vim.api.nvim_list_bufs()
 		if #buffers == 1 and vim.api.nvim_buf_get_name(buffers[1]) == "" then
@@ -129,9 +141,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 
-  vim.api.nvim_create_autocmd("BufEnter", {
-    callback = function()
-	  vim.cmd("Neotree close")
-    end,
-  })
+ vim.api.nvim_create_autocmd("BufEnter", {
+   callback = function()
+     vim.cmd("Neotree close")
+   end
+   })
 
