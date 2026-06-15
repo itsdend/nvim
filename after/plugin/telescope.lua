@@ -6,6 +6,22 @@ vim.keymap.set('n', '<M-f><M-i>', '<cmd>Telescope find_files<CR>', { noremap = t
 vim.keymap.set('n', '<M-f>o', '<cmd>Telescope lsp_document_symbols<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<M-f><M-o>', '<cmd>Telescope lsp_document_symbols<CR>', { noremap = true, silent = true })
 
+-- local builtin = require("telescope.builtin")
+
+-- vim.keymap.set("n", "<M-f><M-o>", function()
+--   local ft = vim.api.nvim_buf_get_option(0, "filetype")
+
+--   if ft == "erlang" then
+--     -- For Erlang, prefill the search with "start"
+--     builtin.lsp_document_symbols({
+--       default_text = "/ function",
+--     })
+--   else
+--     -- Default behavior for other filetypes
+--     builtin.lsp_document_symbols()
+--   end
+-- end, { noremap = true, silent = true })
+
 vim.keymap.set('n', '<M-f>f', '<cmd>Telescope grep_string<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<M-f><M-f>', '<cmd>Telescope grep_string<CR>', { noremap = true, silent = true })
 
@@ -22,7 +38,12 @@ vim.keymap.set('n', '<M-f>t', '<cmd> Telescope toggleterm_manager<CR>', {noremap
 vim.keymap.set('n', '<M-f><M-t>', '<cmd> Telescope toggleterm_manager<CR>', {noremap = true, silent = true})
 
 
-vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<CR>', { desc = 'find refs in repo', noremap = true, silent= true })
+vim.keymap.set('n', '<M-f>r', '<cmd>Telescope lsp_references<CR>', { desc = 'find refs in repo', noremap = true, silent= true })
+vim.keymap.set("n", "<M-f>d", function()
+  require("telescope.builtin").lsp_definitions({
+    jump_type = "never",
+  })
+end)
 -- vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, { desc = 'Goto [R]eferences (Telescope)' })
 
 local telescope = require('telescope')
