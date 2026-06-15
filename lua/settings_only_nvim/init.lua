@@ -12,7 +12,7 @@ vim.opt.linebreak = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = false
 vim.opt.fileencoding = 'utf-8'
-vim.opt.expandtab = false
+vim.opt.expandtab = true
 vim.opt.swapfile = false
 vim.opt.fillchars = { eob = " " }
 vim.opt.splitright = true
