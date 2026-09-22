@@ -54,6 +54,13 @@ end
 
 vim.keymap.set({ 'n', 'i', 't' }, '<A-t>c', ':lua REBAR_CT_TOGGLE()<CR>', { silent = true })
 
+-- claude code
+local claude = Terminal:new({ cmd = "claude", hidden = true, display_name = "claude", close_on_exit = true })
+function CLAUDE_TOGGLE()
+	claude:toggle()
+end
+vim.keymap.set({ 'n', 't', 'i' }, '<A-t>a', ':lua CLAUDE_TOGGLE()<CR>', { silent = true })
+
 -- rebar3 ct case
 function REBAR_CT_CASE(suite, case, sname)
 	local this_cmd = "rebar3 ct --sname " .. sname .. " --setcookie cookie --suite " .. suite .. " --case " .. case
