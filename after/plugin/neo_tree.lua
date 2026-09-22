@@ -22,6 +22,14 @@ require("neo-tree").setup({
 })
 
 
+vim.api.nvim_create_autocmd("WinLeave", {
+	callback = function()
+		if vim.bo.filetype == "neo-tree" then
+			vim.cmd("Neotree close")
+		end
+	end,
+})
+
 -- Neo-tree keymaps
 vim.keymap.set(
 	"n",
