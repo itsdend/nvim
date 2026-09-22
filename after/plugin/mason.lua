@@ -1,17 +1,6 @@
---require('mason').setup {
-
---}
---require('mason-lspconfig').setup {
---	ensure_installed = { "lua_ls", "erlangls", "jsonls", "bashls", "vimls", "elixirls", "html", "marksman", "dotls", "clangd", "cssls", "lemminx"}
---}
-
 -- =================MUST=====================================
 local util = require("lspconfig.util")
---
--- OVO je original
---
--- local capabilities = require('cmp_nvim_lsp').default_capabilities()
---
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.workspace = {
     didChangeWatchedFiles = {
@@ -19,123 +8,27 @@ capabilities.workspace = {
     }
 }
 
-require('lspconfig').lua_ls.setup { capabilities = capabilities }
-require('lspconfig').nil_ls.setup { capabilities = capabilities }
-require('lspconfig').lemminx.setup { capabilities = capabilities }
-require('lspconfig').cssls.setup { capabilities = capabilities }
-require('lspconfig').clangd.setup { capabilities = capabilities }
-require('lspconfig').dotls.setup { capabilities = capabilities }
-require('lspconfig').marksman.setup { capabilities = capabilities }
-require('lspconfig').html.setup { capabilities = capabilities }
--- require('lspconfig').erlangls.setup { capabilities = capabilities }
--- require('lspconfig').elp.setup { capabilities = capabilities}
+vim.lsp.config('lua_ls', { capabilities = capabilities })
+vim.lsp.config('nil_ls', { capabilities = capabilities })
+vim.lsp.config('lemminx', { capabilities = capabilities })
+vim.lsp.config('cssls', { capabilities = capabilities })
+vim.lsp.config('clangd', { capabilities = capabilities })
+vim.lsp.config('dotls', { capabilities = capabilities })
+vim.lsp.config('marksman', { capabilities = capabilities })
+vim.lsp.config("markdown_oxide", {
+  cmd = { "markdown-oxide" },
+  filetypes = { "markdown" },
+  root_markers = { ".git", ".obsidian" },
+})
 
---   root_dir = function(fname)
---     return util.root_pattern("rebar.config")(fname)
---       or util.find_git_ancestor(fname)
---   end,
-
---   single_file_support = false,
--- })
-require('lspconfig').elixirls.setup { capabilities = capabilities }
-require('lspconfig').jsonls.setup { capabilities = capabilities }
-require('lspconfig').bashls.setup { capabilities = capabilities }
-require('lspconfig').vimls.setup { capabilities = capabilities }
-require('lspconfig').pylsp.setup { capabilities = capabilities}
--- vim.lsp.config('lua_ls', { capabilities = capabilities })
--- vim.lsp.config('nil_ls', { capabilities = capabilities })
--- vim.lsp.config('lemminx', { capabilities = capabilities })
--- vim.lsp.config('cssls', { capabilities = capabilities })
--- vim.lsp.config('clangd', { capabilities = capabilities })
--- vim.lsp.config('dotls', { capabilities = capabilities })
--- vim.lsp.config('marksman', { capabilities = capabilities })
--- vim.lsp.config('html', { capabilities = capabilities })
---
--- OVO za elp radi
-vim.lsp.config('erlangls', {capabilities = capabilities, 
-root_dir = vim.fn.getcwd()})
--- do tud je fixan dio s masovnim stvaranjem elp klijenata
-
-
---   capabilities = vim.tbl_deep_extend("force", capabilities, {
---     textDocument = {
--- semanticTokens = {
---           augmentsSyntaxTokens = false,
---           dynamicRegistration = false,
---           formats = { "relative" },
---           multilineTokenSupport = false,
---           overlappingTokenSupport = false,
---           requests = {
---             full = false,
---             range = false
---           },
---           serverCancelSupport = true,
---           tokenModifiers = {},
---           tokenTypes = {}
---         }
---     },
---   }),
--- })
-  -- root_dir = function(bufnr, on_dir)
-  --   -- get filename from buffer
-  --   local fname = vim.api.nvim_buf_get_name(bufnr)
-
-  --   -- ignore nix store files
-  --   if fname:match("^/nix/store/") then
-  --     on_dir(vim.loop.cwd())
-  --     return
-  --   end
-
-  --   -- find project root using standard markers
-  --   local root = util.root_pattern("rebar.config", "erlang.mk", ".git")(fname)
-  --     or util.find_git_ancestor(fname)
-
-  --   if root then
-  --     on_dir(root)  -- start LSP with this root
-  --   else
-  --     on_dir(vim.loop.cwd())  -- fallback
-  --   end
-  -- end,
-  -- ========================================================
- -- root_dir = function(bufnr, on_dir)
- --    local fname = vim.api.nvim_buf_get_name(bufnr)
- --    if fname == "" then return end
-
- --    -- ignore nix store
- --    if fname:match("^/nix/store/") then
- --      on_dir(vim.loop.cwd())
- --      return
- --    end
-
- --    -- search for all rebar.config files upwards
- --    local dirs = util.search_ancestors(fname, function(path)
- --      if vim.fn.filereadable(path .. "/rebar.config") == 1 then
- --        return path
- --      end
- --    end)
-
- --    local root
- --    if #dirs > 0 then
- --      -- nearest rebar.config → app root
- --      root = dirs[#dirs]
- --    else
- --      -- fallback to umbrella or git ancestor
- --      root = util.find_git_ancestor(fname) or vim.loop.cwd()
- --    end
-
- --    on_dir(root)
- --  end,
-						-- settings = {
-
-						-- 	elp = {
-						-- 		diagnostics = {
-						-- 			disabled = {
-						-- 				"L0002"
-						-- 			}
-						-- 		}
-						-- 	}
-						-- }
-					-- })
+vim.lsp.enable("markdown_oxide")
+vim.lsp.config('html', { capabilities = capabilities })
+vim.lsp.config('elixirls', {
+    cmd = { 'elixir-ls'},
+})
+vim.lsp.config('pylsp', { capabilities = capabilities })
+vim.lsp.config('elp', {capabilities = capabilities, 
+                        root_dir = vim.fn.getcwd()})
 vim.lsp.config('jsonls', { capabilities = capabilities })
 vim.lsp.config('bashls', { capabilities = capabilities })
 vim.lsp.config('vimls', { capabilities = capabilities })
@@ -197,19 +90,20 @@ vim.api.nvim_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<
 
 
 
--- vim.lsp.enable('lua_ls')
--- vim.lsp.enable('nil_ls')
--- vim.lsp.enable('lemminx')
--- vim.lsp.enable('cssls')
--- vim.lsp.enable('clangd')
--- vim.lsp.enable('dotls')
--- vim.lsp.enable('marksman')
--- vim.lsp.enable('html')
--- vim.lsp.enable('elp')
-vim.lsp.enable('erlangls')
--- vim.lsp.enable('elixirls')
--- vim.lsp.enable('jsonls')
--- vim.lsp.enable('bashls')
--- vim.lsp.enable('vimls')
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('nil_ls')
+vim.lsp.enable('lemminx')
+vim.lsp.enable('cssls')
+vim.lsp.enable('clangd')
+vim.lsp.enable('dotls')
+vim.lsp.enable('marksman')
+vim.lsp.enable('markdown_oxide')
+vim.lsp.enable('html')
+vim.lsp.enable('elp')
+vim.lsp.enable('elixirls')
+vim.lsp.enable('jsonls')
+vim.lsp.enable('bashls')
+vim.lsp.enable('vimls')
+vim.lsp.enable('pylsp')
 
 

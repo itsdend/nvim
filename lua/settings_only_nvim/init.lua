@@ -17,6 +17,7 @@ vim.opt.swapfile = false
 vim.opt.fillchars = { eob = " " }
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.cmdheight = 0
 vim.keymap.set("n", "<C-d>", '<C-d>zz', { noremap = true })
 vim.keymap.set("n", "<C-u>", '<C-u>zz', { noremap = true })
 vim.keymap.set("n", "<leader>p", '"+p')
