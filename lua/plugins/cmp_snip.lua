@@ -12,14 +12,14 @@ local cmp_icons = {
 	Field = "󰠴"
 }
 
+require("luasnip.loaders.from_vscode").load({ paths = { "./vscode_snippets" } })
+require("luasnip.loaders.from_vscode").load()
+
 local cmp = require 'cmp'
 cmp.setup({
 	snippet = {
-		-- REQUIRED - you must specify a snippet engine
-		require("luasnip.loaders.from_vscode").load({ paths = { "./vscode_snippets" } }),
-		require("luasnip.loaders.from_vscode").load(),
 		expand = function(args)
-			require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+			require('luasnip').lsp_expand(args.body)
 		end,
 	},
 	completion = {

@@ -1,24 +1,4 @@
 vim.g.mapleader = " "
---if vim.g.vscode then
---	--definitions
---	km.set("n", "gD", function() vim.fn.VSCodeNotify("editor.action.revealDefinitionAside") end)
---	--rename
---	km.set("n", "<leader>r", function() vim.fn.VSCodeNotify("editor.action.rename") end)
---	km.set("v", "<leader>r", function() vim.fn.VSCodeNotifyVisual("editor.action.selectHighlights", 1) end)
---	--vertical movement
---	km.set("n", "<leader>s", function() vim.fn.VSCodeNotify("workbench.action.files.save") end)
-
---	--select and debug
---	km.set("v", "<leader>d",
---		function()
---			vim.fn.VSCodeNotifyVisual("workbench.action.debug.selectandstart", 1)
---			vim.api.nvim_command("stopinsert")
---			vim.fn.VSCodeNotify("vscode-neovim.escape")
---		end)
---else
---	-- ordinary Neovim
---	require('settings_only_nvim')
---end
 
 require('settings_only_nvim')
 

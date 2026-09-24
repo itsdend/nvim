@@ -146,18 +146,3 @@ vim.keymap.set('n',        'F', '<Plug>(leap-from-window)')
 vim.keymap.set({'x', 'o'}, 'f', '<Plug>(leap-forward)')
 vim.keymap.set({'x', 'o'}, 'F', '<Plug>(leap-backward)')
 
---
---#region DEPRECATED
---
---otvori file u operi, teski hardcode, necu brisati ndms
--- vrijedi za winodws masine i wsl2
-function OPEN_IN_OPERA_GX(current_file)
-	local opera_invoke =
-		"cmd.exe /C start \"\" \"$(wslpath -w /mnt/c/Users/Marko/AppData/Local/Programs/Opera\\ GX/launcher.exe)\" $(wslpath -w " ..
-		current_file .. ")"
-	vim.fn.system(opera_invoke)
-end
-
-vim.keymap.set('n', '<A-u>b', ':lua OPEN_IN_OPERA_GX(vim.fn.expand("%:p"))<CR>', { silent = true })
-vim.keymap.set('n', '<A-u><A-b>', ':lua OPEN_IN_OPERA_GX(vim.fn.expand("%:p"))<CR>', { silent = true })
---#endregion
