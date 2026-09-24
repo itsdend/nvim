@@ -2,143 +2,171 @@ vim.g.mapleader = " "
 
 require('settings_only_nvim')
 
-return require 'packer'.startup(function()
-	use 'wbthomason/packer.nvim'
-	use 'tpope/vim-surround'
-	use 'tpope/vim-commentary'
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.uv.fs_stat(lazypath) then
+    vim.fn.system({
+        "git", "clone", "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
 
-	--use { "catppuccin/nvim", as = "catppuccin" }
-	use {
-		'nvim-treesitter/nvim-treesitter',
-		run = function()
-			local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-			ts_update()
-		end,
-	}
-	require("plugins.treesitter")
+require('lazy').setup({
+    'tpope/vim-surround',
+    'tpope/vim-commentary',
 
-	use('nvim-treesitter/playground')
-	use {
-		'nvim-telescope/telescope.nvim', tag = '0.1.8',
-		-- or                            , branch = '0.1.x',
-		requires = { { 'nvim-lua/plenary.nvim' } }
-	}
-	use {
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
-		}
-	}
-	use {
-		'nvim-lualine/lualine.nvim',
-		requires = {
-			'nvim-tree/nvim-web-devicons',
-			'yavorski/lualine-macro-recording.nvim',
-			opt = true
-		}
-	}
-	use {
-		--"williamboman/mason.nvim",
-		--"williamboman/mason-lspconfig.nvim",
-		"neovim/nvim-lspconfig",
-	}
+    {
+        'nvim-treesitter/nvim-treesitter',
+        branch = 'master',
+        build = ':TSUpdate',
+        config = function()
+            require("plugins.treesitter")
+        end,
+    },
 
-	use 'HiPhish/rainbow-delimiters.nvim'
-	require("plugins.rainbow_delimiter")
+    {
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.8',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+    },
 
-	--smoothscroll
-	use 'karb94/neoscroll.nvim'
-	require('neoscroll').setup({
-		performance_mode = true,
-	})
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons",
+            "MunifTanjim/nui.nvim",
+        },
+    },
 
-	--toggle term
-	use { "akinsho/toggleterm.nvim", tag = '*'
-	}
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = {
+            'nvim-tree/nvim-web-devicons',
+            'yavorski/lualine-macro-recording.nvim',
+        },
+    },
 
+    'neovim/nvim-lspconfig',
 
-	 use {
-		'ryanmsnyder/toggleterm-manager.nvim',
-		requires = {
-		  'akinsho/toggleterm.nvim',    -- Required dependency
-		  'nvim-telescope/telescope.nvim',  -- Required dependency
-		  'nvim-lua/plenary.nvim',          -- Telescope dependency
-		}
-	}
+    {
+        'HiPhish/rainbow-delimiters.nvim',
+        config = function()
+            require("plugins.rainbow_delimiter")
+        end,
+    },
 
-	-- noice
-	use 'MunifTanjim/nui.nvim'
+    {
+        'karb94/neoscroll.nvim',
+        config = function()
+            require('neoscroll').setup({ performance_mode = true })
+        end,
+    },
 
-	-- lazy.nvim
-	use {
-		"folke/noice.nvim",
-		requires = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify"
-		}
-	}
+    { "akinsho/toggleterm.nvim", version = '*' },
 
-	use { 'ThePrimeagen/harpoon', branch = 'harpoon2', }
-	require("harpoon").setup()
+    {
+        'ryanmsnyder/toggleterm-manager.nvim',
+        dependencies = {
+            'akinsho/toggleterm.nvim',
+            'nvim-telescope/telescope.nvim',
+            'nvim-lua/plenary.nvim',
+        },
+    },
 
-	--autopair parenthesis
-	use {
-		'windwp/nvim-autopairs',
-		config = function()
-			require('nvim-autopairs').setup {}
-			local npairs = require'nvim-autopairs'
-			local Rule = require'nvim-autopairs.rule'
-			npairs.add_rule(Rule('<<', '>>',
-			{
-				'erlang'
-			}))
-		end
-	}
+    'MunifTanjim/nui.nvim',
 
-	--luasnip
-	use 'L3MON4D3/LuaSnip'
-	use 'saadparwaiz1/cmp_luasnip'
-	use "rafamadriz/friendly-snippets"
+    {
+        "folke/noice.nvim",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
+    },
 
-	--autocomplete
-	use 'hrsh7th/nvim-cmp'
-	use 'hrsh7th/cmp-nvim-lsp'
-	use 'hrsh7th/cmp-buffer'
-	require("plugins.cmp_snip")
+    {
+        'ThePrimeagen/harpoon',
+        branch = 'harpoon2',
+        config = function()
+            require("harpoon").setup()
+        end,
+    },
 
-	use 'lewis6991/gitsigns.nvim'
-	require("plugins.gitsigns")
+    {
+        'windwp/nvim-autopairs',
+        config = function()
+            require('nvim-autopairs').setup {}
+            local npairs = require('nvim-autopairs')
+            local Rule = require('nvim-autopairs.rule')
+            npairs.add_rule(Rule('<<', '>>', { 'erlang' }))
+        end,
+    },
 
-	-- show colors behind the hex codes
-	use 'NvChad/nvim-colorizer.lua'
-	require 'colorizer'.setup()
+    'L3MON4D3/LuaSnip',
+    'saadparwaiz1/cmp_luasnip',
+    'rafamadriz/friendly-snippets',
 
-	-- Packer
-	use "sindrets/diffview.nvim"
-	require 'diffview'.setup()
+    {
+        'hrsh7th/nvim-cmp',
+        dependencies = {
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
+        },
+        config = function()
+            require("plugins.cmp_snip")
+        end,
+    },
 
-	-- undotree
-	use { 'jiaoshijie/undotree',
-		requires = "nvim-lua/plenary.nvim"
-	}
-	require('undotree').setup()
-	vim.keymap.set('n', '<leader>u', require('undotree').toggle, { noremap = true, silent = true })
+    {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require("plugins.gitsigns")
+        end,
+    },
 
+    {
+        'NvChad/nvim-colorizer.lua',
+        config = function()
+            require('colorizer').setup()
+        end,
+    },
 
-	use { 'https://codeberg.org/andyg/leap.nvim',
-		requires = 'tpope/vim-repeat'
-	}
+    'sindrets/diffview.nvim',
 
+    {
+        'jiaoshijie/undotree',
+        dependencies = 'nvim-lua/plenary.nvim',
+    },
 
-	use { "itsdend/pastel_inu_nvim", as = "catppuccin" }
-	-- use { "~/Projects/personal/pastel_inu_nvim", as = "catppuccin" }
-	require("plugins.catppuccin")
-	vim.cmd 'colorscheme catppuccin-mocha'
+    {
+        url = 'https://codeberg.org/andyg/leap.nvim',
+        dependencies = 'tpope/vim-repeat',
+    },
 
-	use 'liuchengxu/graphviz.vim'
-	vim.keymap.set('n', '<A-u>q', ': GraphvizCompile pdf<CR>', { noremap = true, silent = true })
-	vim.keymap.set('n', '<A-u><A-q>', ': GraphvizCompile pdf<CR>', { noremap = true, silent = true })
-end)
+    {
+        'itsdend/pastel_inu_nvim',
+        name = 'catppuccin',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require("plugins.catppuccin")
+            vim.cmd 'colorscheme catppuccin-mocha'
+        end,
+    },
+
+    {
+        'liuchengxu/graphviz.vim',
+        config = function()
+            vim.keymap.set('n', '<A-u>q', ':GraphvizCompile pdf<CR>', { noremap = true, silent = true })
+            vim.keymap.set('n', '<A-u><A-q>', ':GraphvizCompile pdf<CR>', { noremap = true, silent = true })
+        end,
+    },
+
+}, {
+    defaults = { lazy = false },
+})
