@@ -55,7 +55,16 @@ end
 vim.keymap.set({ 'n', 'i', 't' }, '<A-t>c', ':lua REBAR_CT_TOGGLE()<CR>', { silent = true })
 
 -- claude code
-local claude = Terminal:new({ cmd = "claude", hidden = true, display_name = "claude", close_on_exit = true })
+local claude = Terminal:new({
+	cmd = "claude",
+	hidden = true,
+	display_name = "claude",
+	close_on_exit = true,
+	direction = "vertical",
+	on_open = function(term)
+		vim.cmd("wincmd H")
+	end,
+})
 function CLAUDE_TOGGLE()
 	claude:toggle()
 end
